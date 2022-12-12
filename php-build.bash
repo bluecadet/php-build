@@ -107,6 +107,7 @@ echo "Building PHP $ACTION_PHP_VERSION with extensions: $ACTION_PHP_EXTENSIONS .
 echo "$dockerfile" > Dockerfile-php-build
 echo "Dockerfile:" >> output.log 2>&1
 echo "$dockerfile" >> output.log 2>&1
+echo "$dockerfile"
 # docker build --tag "$docker_tag" --cache-from "$docker_tag" --file Dockerfile-php-build . >> output.log 2>&1
 docker build --tag "$docker_tag" --no-cache --file Dockerfile-php-build . >> output.log 2>&1
 # Update the user's repository with the customised docker image, ready for the
