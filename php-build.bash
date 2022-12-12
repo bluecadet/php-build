@@ -94,10 +94,10 @@ echo "$docker_tag" > ./docker_tag
 echo "Pulling $docker_tag" >> output.log 2>&1
 
 # No need to continue building the image if the pull was successful.
-if docker pull "$docker_tag" >> output.log 2>&1;
-then
-	exit
-fi
+# if docker pull "$docker_tag" >> output.log 2>&1;
+# then
+# 	exit
+# fi
 
 echo "Building PHP $ACTION_PHP_VERSION with extensions: $ACTION_PHP_EXTENSIONS ..."
 # Save the dockerfile to a physical file on disk, then build the image, tagging
@@ -107,7 +107,8 @@ echo "Building PHP $ACTION_PHP_VERSION with extensions: $ACTION_PHP_EXTENSIONS .
 echo "$dockerfile" > Dockerfile-php-build
 echo "Dockerfile:" >> output.log 2>&1
 echo "$dockerfile" >> output.log 2>&1
-docker build --tag "$docker_tag" --cache-from "$docker_tag" --file Dockerfile-php-build . >> output.log 2>&1
+# docker build --tag "$docker_tag" --cache-from "$docker_tag" --file Dockerfile-php-build . >> output.log 2>&1
+docker build --tag "$docker_tag" --no-cache --file Dockerfile-php-build . >> output.log 2>&1
 # Update the user's repository with the customised docker image, ready for the
 # next Github Actions run.
 if ! docker push "$docker_tag" >> output.log 2>&1; then
